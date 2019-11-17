@@ -59,6 +59,10 @@ Callback.addCallback("tick", function () {
   let MobEffect = Native.PotionEffect;
   let player = Player.get();
   if (!Player.getFlyingEnabled()){
+	  if (!Purity.isShow){
+        Purity.init();
+        Purity.isShow = true;
+      }
                 if (Purity.purity >= 0.005) {
 				    let color;
 					if (Purity.isMin){
@@ -69,10 +73,6 @@ Callback.addCallback("tick", function () {
                     Purity.purity-=0.005;
                     Purity.update(Purity.purity, color);
                 }
-    if (!Purity.isShow){
-        Purity.init();
-        Purity.isShow = true;
-    }
 	if (Purity.purity <= 15) {
 		Purity.isMin = true;
 	}

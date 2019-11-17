@@ -66,6 +66,10 @@ Callback.addCallback("tick", function () {
   let MobEffect = Native.PotionEffect;
   let player = Player.get();
   if (!Player.getFlyingEnabled()){
+	if (!Energy.isShow){
+        Energy.init();
+        Energy.isShow = true;
+    } 
     let cor1 = Player.getVelocity();
     if ((cor1.x > 0) || (cor1.x < 0)){
         if ((cor1.y > 0) || (cor1.y < 0)){
@@ -83,10 +87,6 @@ Callback.addCallback("tick", function () {
             }
         }
     }
-    if (!Energy.isShow){
-        Energy.init();
-        Energy.isShow = true;
-    } 
 	if(Energy.energy <= 15) {
 		    Energy.isMin = true;
             Entity.addEffect(player, 2, 1, 100, true, true);

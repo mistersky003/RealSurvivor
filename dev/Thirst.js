@@ -59,6 +59,10 @@ Callback.addCallback("tick", function () {
   let MobEffect = Native.PotionEffect;
   let player = Player.get();
   if (!Player.getFlyingEnabled()){
+	  if (!Thirst.isShow){
+        Thirst.init();
+        Thirst.isShow = true;
+      }
                 if (Thirst.thirst >= 0.002) {
 				    let color;
 					if (Thirst.isMin){
@@ -69,10 +73,6 @@ Callback.addCallback("tick", function () {
                     Thirst.thirst-=0.002;
                     Thirst.update(Thirst.thirst, color);
                 }
-    if (!Thirst.isShow){
-        Thirst.init();
-        Thirst.isShow = true;
-    }
 	if (Thirst.thirst <= 15) {
 		Thirst.isMin = true;
 	}
