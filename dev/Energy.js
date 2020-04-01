@@ -11,6 +11,7 @@ var Energy = {
                     Energy.container.openAs(Energy.popupWindow);
                 }
             }));
+			
     },
     
     init: function () {
@@ -62,6 +63,7 @@ var Energy = {
     
 };
 
+
 Callback.addCallback("tick", function () { 
   let MobEffect = Native.PotionEffect;
   let player = Player.get();
@@ -95,20 +97,20 @@ Callback.addCallback("tick", function () {
             Entity.addEffect(player, 15, 2, 100, true, true);
 	}
   }
+  
 });
 
 Callback.addCallback("ItemUse", function (coords, item, block) {
-    if (block.id == 26){
+	if (block.id == 26){
         Energy.sleep();
     }
 });
 
 Callback.addCallback("NativeGuiChanged", function (screenName) {
-    if((screenName == "hud_screen") || (screenName == "in_game_play_screen")) {
-       if (!Player.getFlyingEnabled()){
+	let mode = Game.getGameMode();
+    if((screenName == "in_game_play_screen") && ((mode == 0) || (mode == 2))) {
            Energy.init();
-       }
     } else {
-        Energy.container.close();
+           Energy.container.close();
     }
 });

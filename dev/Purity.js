@@ -98,11 +98,10 @@ Callback.addCallback("ItemUse", function (coords, item, block) {
 });
 
 Callback.addCallback("NativeGuiChanged", function (screenName) {
-    if((screenName == "hud_screen") || (screenName == "in_game_play_screen")) {
-       if (!Player.getFlyingEnabled()){
+	let mode = Game.getGameMode();
+    if((screenName == "in_game_play_screen") && ((mode == 0) || (mode == 2))) {
            Purity.init();
-       }
     } else {
-        Purity.container.close();
+           Purity.container.close();
     }
 });
